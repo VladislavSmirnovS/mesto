@@ -1,0 +1,17 @@
+.element__like {
+  background-image: url(../../../images/white-heart.svg);
+  margin-right: 20px;
+  width: 22px;
+  height: 19px;
+  border: none;
+  background-color: #fff;
+  padding: 0;
+}
+
+.element__like:hover {
+  opacity: 0.6;
+}
+
+.element__like:focus {
+  background-image: url(../../../../images/black-heart.svg);
+}
