@@ -1,6 +1,6 @@
 # Проект: Место
 
-## [Ссылка на проект](https://github.com/VladislavSmirnovS/mesto)
+## [Ссылка на проект](https://vladislavsmirnovs.github.io/mesto/)
 
 ## Данный проект нацелен на применение в работе освоенных навыков JavaScript и закрепление умения адаптивной версти.
 
