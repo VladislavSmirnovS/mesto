@@ -5,16 +5,10 @@
   align-items: center;
 }
 
-@media screen and (max-width: 824px) {
+@media screen and (max-width: 905px) {
   .profile__name-block {
     justify-content: center;
     text-align: center;
-    margin: 0;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .profile__name-block {
     margin: 0 0 14px;
   }
 }

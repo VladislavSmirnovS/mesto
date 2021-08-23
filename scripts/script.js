@@ -3,29 +3,27 @@ let popup = document.querySelector(".popup");
 let closeButton = document.querySelector(".popup__button-close");
 let inputName = document.querySelector(".profile__info-name");
 let inputProfession = document.querySelector(".profile__info-profession");
-let popupInputName = document.querySelector(".popup__name");
-let popupInputProfession = document.querySelector(".popup__profession");
-let saveButton = document.querySelector(".popup__button-save");
+let popupInputName = document.querySelector("#popup_name");
+let popupInputProfession = document.querySelector("#popup_profession");
 let formSubmit = document.querySelector(".popup__form");
 
-function openPopup() {
-  popup.classList.toggle("popup_opened");
-  popupInputName.value = inputName.textContent;
-  popupInputProfession.value = inputProfession.innerText;
+
+function togglePopup() {
+  if (!popup.classList.contains('popup_opened')) {
+    popupInputName.value = inputName.textContent; 
+    popupInputProfession .value = inputProfession.textContent; 
+  }
+  popup.classList.toggle('popup_opened')
 }
 
-function closePopup() {
-  popup.classList.toggle("popup_opened");
-}
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
-
   inputName.textContent = popupInputName.value;
   inputProfession.textContent = popupInputProfession.value;
-  closePopup();
+  togglePopup();
 }
 
 formSubmit.addEventListener("submit", formSubmitHandler);
-openButton.addEventListener("click", openPopup);
-closeButton.addEventListener("click", closePopup);
+openButton.addEventListener("click", togglePopup);
+closeButton.addEventListener("click", togglePopup);
