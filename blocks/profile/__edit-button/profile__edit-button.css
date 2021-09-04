@@ -20,6 +20,12 @@
   }
 }
 
+@media screen and (max-width: 400px) {
+  .profile__edit-button {
+    padding: 9px;
+  }
+}
+
 .profile__edit-button:hover {
   opacity: 0.6;
 }
