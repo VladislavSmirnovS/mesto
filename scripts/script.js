@@ -1,19 +1,19 @@
-let editButton = document.querySelector(".profile__edit-button");
-let popupProfile = document.querySelector(".popup_profile");
-let popup = document.querySelector(".popup__container");
-let popupElement= document.querySelector(".popup_element");
-let popupPicture=document.querySelector(".popup_picture")
-let closeButton = document.querySelectorAll(".popup__button-close");
-let inputName = document.querySelector(".profile__info-name");
-let inputProfession = document.querySelector(".profile__info-profession");
-let popupInputName = document.querySelector("#popup-name");
-let popupInputProfession = document.querySelector("#popup-profession");
-let popupInputPlace = document.querySelector("#popup-place");
-let popupInputLink = document.querySelector("#popup-link");
-let formSubmit = document.querySelectorAll(".popup__form");
-let addButton = document.querySelector(".profile__button-add");
-let popupImage = document.querySelector(".popup__image ")
-let popupCaption = document.querySelector(".popup__caption")
+const editButton = document.querySelector(".profile__edit-button");
+const popupProfile = document.querySelector(".popup_profile");
+const popupElement= document.querySelector(".popup_element");
+const popupPicture=document.querySelector(".popup_picture")
+const closeButton = document.querySelectorAll(".popup__button-close");
+const inputName = document.querySelector(".profile__info-name");
+const inputProfession = document.querySelector(".profile__info-profession");
+const popupInputName = document.querySelector("#popup-name");
+const popupInputProfession = document.querySelector("#popup-profession");
+const popupInputPlace = document.querySelector("#popup-place");
+const popupInputLink = document.querySelector("#popup-link");
+const formSubmitProfile = document.querySelector(".popup__form_profile");
+const formSubmitElement = document.querySelector(".popup__form_element");
+const addButton = document.querySelector(".profile__button-add");
+const popupImage = document.querySelector(".popup__image ")
+const popupCaption = document.querySelector(".popup__caption")
 const postsElement = document.querySelector('.elements')
 const elementTemplate = document.querySelector('#element-template').content;
 
@@ -44,7 +44,7 @@ const initialCards = [
   }
 ];
 
-const addPost= data=>{
+const createPost= data=>{
   const postElement = elementTemplate.querySelector('.element').cloneNode(true);
   postElement.querySelector('.element__picture').src = data.link;
   postElement.querySelector('.element__title').textContent = data.name;
@@ -61,7 +61,7 @@ const addPost= data=>{
 };
 
 initialCards.forEach(data => {
-  postsElement.prepend(addPost(data))});
+  postsElement.prepend(createPost(data))});
 
 const openPopup = popup => {
   popup.classList.add('popup_opened')
@@ -71,37 +71,30 @@ const closePopup = popup => {
 }
 
 const openProfilePopup = popup => {
-  const name = document.querySelector('#popup-name')
-  const job = document.querySelector('#popup-profession')
+  const name = popupInputName
+  const job = popupInputProfession
   openPopup(popup)
   name.value = inputName.textContent
   job.value = inputProfession.textContent
 }
 
-function formSubmitHandler(evt) {
+function submitProfileForm(evt) {
   evt.preventDefault();
   inputName.textContent = popupInputName.value;
   inputProfession.textContent = popupInputProfession.value;
   closePopup(popupProfile);
 }
 
-function formSubmitElement(evt) {
+function submitElementForm(evt) {
   evt.preventDefault();
-  const postElement = elementTemplate.querySelector('.element').cloneNode(true);
-  postElement.querySelector('.element__picture').src = popupInputLink.value;
-  postElement.querySelector('.element__title').textContent = popupInputPlace.value;
-  postElement.querySelector('.element__picture').alt= popupInputPlace.value;
-  postElement.querySelector('.element__like').addEventListener('click' ,(event) => {event.target.classList.toggle('element__like_active')} );
-  postElement.querySelector('.element__remove').addEventListener('click', (event) => {event.target.closest('.element').remove()} );
-  postsElement.prepend(postElement);
+  postsElement.prepend(createPost(evt));
   closePopup(popupElement);
 }
 
-formSubmit[0].addEventListener("submit", formSubmitHandler);
-formSubmit[1].addEventListener("submit", formSubmitElement);
-editButton.addEventListener('click', () => {openProfilePopup(popupProfile)})
-closeButton[0].addEventListener("click", () =>{closePopup(popupProfile)});
-closeButton[1].addEventListener("click", () =>{closePopup(popupElement)}); 
-closeButton[2].addEventListener("click", () =>{closePopup(popupPicture)}); 
+formSubmitProfile.addEventListener("submit", submitProfileForm);
+formSubmitElement.addEventListener("submit", submitElementForm);
+editButton.addEventListener('click', () => {openProfilePopup(popupProfile)});
 addButton.addEventListener("click",  () =>{openPopup(popupElement)});
-
+closeButton.forEach (item => {
+  item.addEventListener("click", () =>{closePopup(event.target.closest('.popup'))});
+});
