@@ -71,11 +71,9 @@ const closePopup = popup => {
 }
 
 const openProfilePopup = popup => {
-  const name = popupInputName
-  const job = popupInputProfession
   openPopup(popup)
-  name.value = inputName.textContent
-  job.value = inputProfession.textContent
+  popupInputName.value = inputName.textContent
+  popupInputProfession.value = inputProfession.textContent
 }
 
 function submitProfileForm(evt) {
@@ -87,7 +85,9 @@ function submitProfileForm(evt) {
 
 function submitElementForm(evt) {
   evt.preventDefault();
-  postsElement.prepend(createPost(evt));
+  postsElement.prepend(createPost({name: popupInputPlace.value, link: popupInputLink.value}));
+  popupInputLink.value=''
+  popupInputPlace.value=''
   closePopup(popupElement);
 }
 
