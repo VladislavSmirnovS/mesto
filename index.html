@@ -41,7 +41,7 @@
       </section>
 
       <div class="popup popup_profile">
-        <div class="popup__container">
+        <div class="popup__container popup__overlay">
           <button class="popup__button-close" type="button"></button>
           <h2 class="popup__title">Редактировать профиль</h2>
           <form class="popup__form popup__form_profile" name="form-profile">
@@ -50,23 +50,29 @@
               id="popup-name"
               placeholder="Ваше имя"
               name="Имя"
+              minlength="2"
+              maxlength="40"
               required
             />
+            <span id="popup-name-error" class="popup__error"></span>
             <input
               class="popup__input popup__input_type_job"
               type="text"
               id="popup-profession"
               placeholder="Чем занимаетесь"
               name="Вид деятельности"
+              minlength="2"
+              maxlength="200"
               required
             />
+            <span id="popup-profession-error" class="popup__error"></span>
             <button type="submit" class="popup__button-save">Сохранить</button>
           </form>
         </div>
       </div>
 
       <div class="popup popup_element">
-        <div class="popup__container">
+        <div class="popup__container popup__overlay">
           <button class="popup__button-close" type="button"></button>
           <h2 class="popup__title">Новое место</h2>
           <form class="popup__form popup__form_element" name="form-element">
@@ -76,23 +82,27 @@
               id="popup-place"
               placeholder="Название"
               name="Название"
+              minlength="2"
+              maxlength="30"
               required
             />
+            <span id="popup-place-error" class="popup__error"></span>
             <input
               class="popup__input popup__input_type_link"
-              type="text"
               id="popup-link"
               placeholder="Ссылка на картинку"
               name="Ссылка на картинку"
+              type="url"
               required
             />
+            <span id="popup-link-error" class="popup__error"></span>
             <button type="submit" class="popup__button-save">Сохранить</button>
           </form>
         </div>
       </div>
 
       <div class="popup popup_picture">
-        <div class="popup__container-picture">
+        <div class="popup__container-picture popup__overlay">
           <button class="popup__button-close" type="button"></button>
           <img class="popup__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt='wd'>
           <h2 class="popup__caption">eeeeeeeeeee</h2>
@@ -114,6 +124,7 @@
         </div>
       </div>
     </template>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/script.js"></script>
   </body>
 </html>
