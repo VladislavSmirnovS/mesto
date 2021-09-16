@@ -2,7 +2,7 @@ const editButton = document.querySelector(".profile__edit-button");
 const popupProfile = document.querySelector(".popup_profile");
 const popupElement = document.querySelector(".popup_element");
 const popupPicture = document.querySelector(".popup_picture");
-const closeButton = document.querySelectorAll(".popup__button-close");
+const closeButtons = document.querySelectorAll(".popup__button-close");
 const inputName = document.querySelector(".profile__info-name");
 const inputProfession = document.querySelector(".profile__info-profession");
 const popupInputName = document.querySelector("#popup-name");
@@ -15,9 +15,9 @@ const addButton = document.querySelector(".profile__button-add");
 const popupImage = document.querySelector(".popup__image ");
 const popupCaption = document.querySelector(".popup__caption");
 const postsElement = document.querySelector(".elements");
-const globalPopup = document.querySelectorAll(".popup");
 const elementTemplate = document.querySelector("#element-template").content;
-const popupContaiener = document.querySelectorAll(".popup__overlay");
+const popupContaieners = document.querySelectorAll(".popup__overlay");
+const globalPopups = document.querySelectorAll(".popup");
 const initialCards = [
   {
     name: "Архыз",
@@ -63,13 +63,9 @@ const createPost = (data) => {
   postElement
     .querySelector(".element__big-picture")
     .addEventListener("click", (event) => {
-      popupImage.src = event.target.src;
-      popupImage.alt = event.target
-        .closest(".element")
-        .querySelector(".element__title").textContent;
-      popupCaption.textContent = event.target
-        .closest(".element")
-        .querySelector(".element__title").textContent;
+      popupImage.src = data.link;
+      popupImage.alt = data.name;
+      popupCaption.textContent = data.name;
       openPopup(popupPicture);
     });
   return postElement;
@@ -79,29 +75,34 @@ initialCards.forEach((data) => {
   postsElement.prepend(createPost(data));
 });
 
-popupContaiener.forEach((item) =>
+popupContaieners.forEach((item) =>
   item.addEventListener("mousedown", (evt) => {
     evt.stopPropagation();
   })
 );
 
-const openPopup = (popup) => {
-  popup.classList.add("popup_opened");
-  popup.addEventListener("mousedown", (evt) => {
+globalPopups.forEach((item) => {
+  item.addEventListener("mousedown", (evt) => {
     closePopup(evt.target.closest(".popup"));
   });
-  document.addEventListener("keydown", (evt) => {
-    if (evt.key === "Escape") {
-      const popupList = document.querySelectorAll(".popup");
-      popupList.forEach((evt) => {
-        evt.classList.remove("popup_opened");
-      });
-    }
-  });
-};
+});
+
+function closeByEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelectorAll(".popup_opened");
+    console.log(openedPopup[0]);
+    closePopup(openedPopup[0]);
+  }
+}
 
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeByEscape);
+};
+
+const openPopup = (popup) => {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closeByEscape);
 };
 
 const openProfilePopup = (popup) => {
@@ -125,18 +126,25 @@ function submitElementForm(evt) {
   popupInputLink.value = "";
   popupInputPlace.value = "";
   closePopup(popupElement);
+  evt.target
+    .querySelector(".popup__button-save")
+    .classList.add("popup__button-save_disabled");
 }
 
 formSubmitProfile.addEventListener("submit", submitProfileForm);
+
 formSubmitElement.addEventListener("submit", submitElementForm);
+
 editButton.addEventListener("click", () => {
   openProfilePopup(popupProfile);
 });
+
 addButton.addEventListener("click", () => {
   openPopup(popupElement);
 });
-closeButton.forEach((item) => {
-  item.addEventListener("click", (event) => {
-    closePopup(event.target.closest(".popup"));
+
+closeButtons.forEach((item) => {
+  item.addEventListener("click", (evt) => {
+    closePopup(evt.target.closest(".popup"));
   });
 });
