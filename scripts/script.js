@@ -16,7 +16,7 @@ const popupImage = document.querySelector(".popup__image ");
 const popupCaption = document.querySelector(".popup__caption");
 const postsElement = document.querySelector(".elements");
 const elementTemplate = document.querySelector("#element-template").content;
-const popupContaieners = document.querySelectorAll(".popup__overlay");
+const popupContainers = document.querySelectorAll(".popup__overlay");
 const globalPopups = document.querySelectorAll(".popup");
 const initialCards = [
   {
@@ -50,24 +50,28 @@ const createPost = (data) => {
   postElement.querySelector(".element__picture").src = data.link;
   postElement.querySelector(".element__title").textContent = data.name;
   postElement.querySelector(".element__picture").alt = data.name;
+
   postElement
     .querySelector(".element__like")
     .addEventListener("click", (event) => {
       event.target.classList.toggle("element__like_active");
     });
+
   postElement
     .querySelector(".element__remove")
     .addEventListener("click", (event) => {
       event.target.closest(".element").remove();
     });
+
   postElement
     .querySelector(".element__big-picture")
-    .addEventListener("click", (event) => {
+    .addEventListener("click", () => {
       popupImage.src = data.link;
       popupImage.alt = data.name;
       popupCaption.textContent = data.name;
       openPopup(popupPicture);
     });
+
   return postElement;
 };
 
@@ -75,7 +79,7 @@ initialCards.forEach((data) => {
   postsElement.prepend(createPost(data));
 });
 
-popupContaieners.forEach((item) =>
+popupContainers.forEach((item) =>
   item.addEventListener("mousedown", (evt) => {
     evt.stopPropagation();
   })
@@ -90,7 +94,6 @@ globalPopups.forEach((item) => {
 function closeByEscape(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelectorAll(".popup_opened");
-    console.log(openedPopup[0]);
     closePopup(openedPopup[0]);
   }
 }
@@ -120,11 +123,14 @@ function submitProfileForm(evt) {
 
 function submitElementForm(evt) {
   evt.preventDefault();
+  
   postsElement.prepend(
     createPost({ name: popupInputPlace.value, link: popupInputLink.value })
   );
+  
   popupInputLink.value = "";
   popupInputPlace.value = "";
+  
   closePopup(popupElement);
   evt.target
     .querySelector(".popup__button-save")
