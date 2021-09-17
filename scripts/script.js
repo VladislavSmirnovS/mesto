@@ -116,12 +116,15 @@ const openProfilePopup = (popup) => {
 
 function submitProfileForm(evt) {
   evt.preventDefault();
+
   inputName.textContent = popupInputName.value;
   inputProfession.textContent = popupInputProfession.value;
+
   closePopup(popupProfile);
+
   const button = evt.target.querySelector(".popup__button-save");
+  button.classList.add("popup__button-save_disabled");
   button.disabled = true;
-  console.log(button);
 }
 
 function submitElementForm(evt) {
@@ -142,7 +145,6 @@ function submitElementForm(evt) {
   const button = evt.target.querySelector(".popup__button-save");
   button.classList.add("popup__button-save_disabled");
   button.disabled = true;
-  console.log(button);
 }
 
 formSubmitProfile.addEventListener("submit", submitProfileForm);
