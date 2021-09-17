@@ -93,8 +93,8 @@ globalPopups.forEach((item) => {
 
 function closeByEscape(evt) {
   if (evt.key === "Escape") {
-    const openedPopup = document.querySelectorAll(".popup_opened");
-    closePopup(openedPopup[0]);
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
   }
 }
 
@@ -119,22 +119,30 @@ function submitProfileForm(evt) {
   inputName.textContent = popupInputName.value;
   inputProfession.textContent = popupInputProfession.value;
   closePopup(popupProfile);
+  const button = evt.target.querySelector(".popup__button-save");
+  button.disabled = true;
+  console.log(button);
 }
 
 function submitElementForm(evt) {
   evt.preventDefault();
-  
+
   postsElement.prepend(
     createPost({ name: popupInputPlace.value, link: popupInputLink.value })
   );
-  
+
   popupInputLink.value = "";
   popupInputPlace.value = "";
-  
+
   closePopup(popupElement);
   evt.target
     .querySelector(".popup__button-save")
     .classList.add("popup__button-save_disabled");
+
+  const button = evt.target.querySelector(".popup__button-save");
+  button.classList.add("popup__button-save_disabled");
+  button.disabled = true;
+  console.log(button);
 }
 
 formSubmitProfile.addEventListener("submit", submitProfileForm);
