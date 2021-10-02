@@ -1,15 +1,15 @@
 export default class Card {
-  constructor(data, handleImageClick) {
+  constructor(data, handleImageClick, formElement) {
     this._link = data.link;
     this._name = data.name;
     this._handleImageClick = handleImageClick;
+    this._formElement = formElement;
   }
 
   _getTemplate() {
     const postElement = document
-      .querySelector("#element-template")
-      .content.querySelector(".element")
-      .cloneNode(true);
+      .querySelector(this._formElement)
+      .content.cloneNode(true);
     return postElement;
   }
 
@@ -35,6 +35,7 @@ export default class Card {
     this._element
       .querySelector(".element__like")
       .classList.toggle("element__like_active");
+    console.log(this._formElement);
   };
 
   _removeCard = () => {
@@ -46,7 +47,7 @@ export default class Card {
     this._setEventListeners();
     this._element.querySelector(".element__picture").src = this._link;
     this._element.querySelector(".element__title").textContent = this._name;
-    this._element.querySelector(".element__title").alt = this._name;
+    this._element.querySelector(".element__picture").alt = this._name;
     return this._element;
   }
 }

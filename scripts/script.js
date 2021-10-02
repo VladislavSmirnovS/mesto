@@ -47,7 +47,9 @@ const initialCards = [
 ];
 
 initialCards.forEach((item) => {
-  createCard(item);
+  postsElement.prepend(
+    createCard(item, handleImageClick, "#element-template").createCard()
+  );
 });
 
 popupContainers.forEach((item) =>
@@ -63,8 +65,8 @@ globalPopups.forEach((item) => {
 });
 
 function createCard(item) {
-  const newCard = new Card(item, handleImageClick);
-  postsElement.prepend(newCard.createCard());
+  const newCard = new Card(item, handleImageClick, "#element-template");
+  return newCard;
 }
 
 function closeByEscape(evt) {
@@ -104,16 +106,13 @@ function submitProfileForm(evt) {
   inputProfession.textContent = popupInputProfession.value;
 
   closePopup(popupProfile);
-
-  const button = evt.target.querySelector(".popup__button-save");
-  button.classList.add("popup__button-save_disabled");
-  button.disabled = true;
+  validFormProfile.disableSubmitButton();
 }
 
 function submitElementForm(evt) {
   evt.preventDefault();
   const value = { name: popupInputPlace.value, link: popupInputLink.value };
-  createCard(value);
+  postsElement.prepend(createCard(value).createCard());
 
   closePopup(popupElement);
 
@@ -147,7 +146,7 @@ const config = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible",
 };
-const validformCard = new FormValidator(config, formSubmitElement);
-validformCard.enableValidation();
-const validformProfile = new FormValidator(config, formSubmitProfile);
-validformProfile.enableValidation();
+const validFormCard = new FormValidator(config, formSubmitElement);
+validFormCard.enableValidation();
+const validFormProfile = new FormValidator(config, formSubmitProfile);
+validFormProfile.enableValidation();
