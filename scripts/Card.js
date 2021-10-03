@@ -1,15 +1,16 @@
 export default class Card {
-  constructor(data, handleImageClick, formElement) {
+  constructor(data, handleImageClick, templateSelector) {
     this._link = data.link;
     this._name = data.name;
     this._handleImageClick = handleImageClick;
-    this._formElement = formElement;
+    this._templateSelector = templateSelector;
   }
 
   _getTemplate() {
     const postElement = document
-      .querySelector(this._formElement)
-      .content.cloneNode(true);
+      .querySelector(this._templateSelector)
+      .content.querySelector(".element")
+      .cloneNode(true);
     return postElement;
   }
 
@@ -35,7 +36,6 @@ export default class Card {
     this._element
       .querySelector(".element__like")
       .classList.toggle("element__like_active");
-    console.log(this._formElement);
   };
 
   _removeCard = () => {

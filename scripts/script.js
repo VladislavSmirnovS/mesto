@@ -47,9 +47,7 @@ const initialCards = [
 ];
 
 initialCards.forEach((item) => {
-  postsElement.prepend(
-    createCard(item, handleImageClick, "#element-template").createCard()
-  );
+  postsElement.prepend(createCard(item));
 });
 
 popupContainers.forEach((item) =>
@@ -66,7 +64,7 @@ globalPopups.forEach((item) => {
 
 function createCard(item) {
   const newCard = new Card(item, handleImageClick, "#element-template");
-  return newCard;
+  return newCard.createCard();
 }
 
 function closeByEscape(evt) {
@@ -112,13 +110,12 @@ function submitProfileForm(evt) {
 function submitElementForm(evt) {
   evt.preventDefault();
   const value = { name: popupInputPlace.value, link: popupInputLink.value };
-  postsElement.prepend(createCard(value).createCard());
-
+  postsElement.prepend(createCard(value));
+  popupInputPlace.value = "";
+  popupInputLink.value = "";
   closePopup(popupElement);
 
-  const button = evt.target.querySelector(".popup__button-save");
-  button.classList.add("popup__button-save_disabled");
-  button.disabled = true;
+  validFormCard.disableSubmitButton();
 }
 
 formSubmitProfile.addEventListener("submit", submitProfileForm);
