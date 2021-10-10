@@ -1,8 +1,8 @@
 export default class Card {
-  constructor(data, handleImageClick, templateSelector) {
+  constructor(data, handleCardClick, templateSelector) {
     this._link = data.link;
     this._name = data.name;
-    this._handleImageClick = handleImageClick;
+    this._handleCardClick = handleCardClick;
     this._templateSelector = templateSelector;
   }
 
@@ -28,7 +28,7 @@ export default class Card {
     this._element
       .querySelector(".element__big-picture")
       .addEventListener("click", () => {
-        this._handleImageClick(this._link, this._name);
+        this._handleCardClick(this._link, this._name);
       });
   }
 
