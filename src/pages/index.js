@@ -82,5 +82,6 @@ const popupAdd = new PopupWIthForm({
 popupAdd.setEventListeners();
 
 addButton.addEventListener("click", () => {
+  validFormCard.disableSubmitButton();
   popupAdd.open();
 });
