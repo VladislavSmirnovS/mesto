@@ -17,18 +17,20 @@
 
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require("./images/photo.jpg")%>" alt="Аватарка" />
-        <div class="profile__info">
+        <div class="profile__cover">
+          <div class="profile__avatar"></div>
+          <div class="profile__info">
           <div class="profile__name-block">
-            <h1 class="profile__info-name">Жак-Ив Кусто</h1>
+            <h1 class="profile__info-name"></h1>
             <button
               class="profile__edit-button"
               type="button"
               aria-label="открыть редактирование профиля"
             ></button>
           </div>
-          <p class="profile__info-profession">Исследователь океана</p>
-        </div>
+          <p class="profile__info-profession"></p>
+        </div></div>
+        
         <button
           class="profile__button-add"
           type="button"
@@ -40,7 +42,7 @@
       </section>
 
       <div class="popup popup_profile">
-        <div class="popup__container popup__overlay">
+        <div class="popup__container">
           <button class="popup__button-close" type="button"></button>
           <h2 class="popup__title">Редактировать профиль</h2>
           <form class="popup__form popup__form_profile" name="form-profile">
@@ -59,7 +61,7 @@
               type="text"
               id="popup-profession"
               placeholder="Чем занимаетесь"
-              name="job"
+              name="about"
               minlength="2"
               maxlength="200"
               required
@@ -71,7 +73,7 @@
       </div>
 
       <div class="popup popup_element">
-        <div class="popup__container popup__overlay">
+        <div class="popup__container">
           <button class="popup__button-close" type="button"></button>
           <h2 class="popup__title">Новое место</h2>
           <form class="popup__form popup__form_element" name="form-element">
@@ -101,12 +103,34 @@
       </div>
 
       <div class="popup popup_picture">
-        <div class="popup__container-picture popup__overlay">
+        <div class="popup__container-picture">
           <button class="popup__button-close" type="button"></button>
-          <img class="popup__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt='ya.ru'>
+          <img class="popup__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt='wd'>
           <h2 class="popup__caption">eeeeeeeeeee</h2>
         </div>
       </div>
+
+      <div class="popup popup_confirm">
+        <div class="popup__container">
+          <button class="popup__button-close" type="button"></button>
+          <h2 class="popup__title">Вы уверены?</h2>
+          <form class="popup__form popup__form_confirm" name="form-confirm">
+            <button type="submit" class="popup__button-confirm">Да</button>
+        </form>
+        </div>
+      </div>
+      
+      <div class="popup popup_avatar">
+        <div class="popup__container">
+          <button class="popup__button-close" type="button"></button>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form class="popup__form popup__form_avatar" name="form-avatar">
+            <input class="popup__input popup__input_type_avatar" id="popup-avatar" placeholder="Ссылка на картинку" name="link" type="url" required />
+            <span id="popup-avatar-error" class="popup__error"></span>
+            <button type="submit" class="popup__button-save">Сохранить</button>
+          </form>
+        </div>
+    
     </main>
 
     <footer class="footer">
@@ -119,7 +143,11 @@
         <button class="element__remove" type="button"></button>
         <div class="element__group">
           <h2 class="element__title"></h2>
-          <button class="element__like" type="button"></button>
+          <div class="element__like-cover">
+            <button class="element__like" type="button"></button>
+            <span class="element__like-counter"></span>
+          </div>
+          
         </div>
       </div>
     </template>
