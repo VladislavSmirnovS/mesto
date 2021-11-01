@@ -5,19 +5,19 @@ export default class Api {
   }
 
   getUserInfo() {
-    return fetch("https://nomoreparties.co/v1/cohort-29/users/me", {
+    return fetch(`${this._url}users/me`, {
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   getCards() {
-    return fetch("https://nomoreparties.co/v1/cohort-29/cards", {
+    return fetch(`${this._url}cards`, {
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   setUserInfo(data) {
-    return fetch("https://nomoreparties.co/v1/cohort-29/users/me", {
+    return fetch(`${this._url}users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -28,7 +28,7 @@ export default class Api {
   }
 
   createCard(newCard) {
-    return fetch("https://nomoreparties.co/v1/cohort-29/cards", {
+    return fetch(`${this._url}cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -39,28 +39,28 @@ export default class Api {
   }
 
   deleteCard(id) {
-    return fetch(`https://nomoreparties.co/v1/cohort-29/cards/${id}`, {
+    return fetch(`${this._url}cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   likeCard(id) {
-    return fetch(`https://nomoreparties.co/v1/cohort-29/cards/likes/${id}`, {
+    return fetch(`${this._url}cards//likes/${id}`, {
       method: "PUT",
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   dislikeCard(id) {
-    return fetch(`https://nomoreparties.co/v1/cohort-29/cards/likes/${id}`, {
+    return fetch(`${this._url}cards//likes/${id}`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   setAvatar(link) {
-    return fetch("https://nomoreparties.co/v1/cohort-29/users/me/avatar", {
+    return fetch(`${this._url}users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar: link.link }),

@@ -73,18 +73,6 @@ const popupTypeDelete = new PopupWithSubmit(".popup_confirm");
 
 popupTypeDelete.setEventListeners();
 
-function renderLoading(isLoading) {
-  if (isLoading) {
-    Array.from(savedButtons).forEach((submit) => {
-      submit.textContent = "Сохранение...";
-    });
-  } else {
-    Array.from(savedButtons).forEach((submit) => {
-      submit.textContent = "Сохранить";
-    });
-  }
-}
-
 function handleCardClick(link, name) {
   popupTypePicture.open(link, name);
 }
@@ -116,7 +104,7 @@ const user = new UserInfo({
 const popupTypeEdit = new PopupWIthForm({
   popupSelector: ".popup_profile",
   handleFormSubmit: (data) => {
-    renderLoading(true);
+    popupTypeEdit.renderLoading(true);
     api
       .setUserInfo(data)
       .then((data) => {
@@ -127,7 +115,7 @@ const popupTypeEdit = new PopupWIthForm({
         console.log(`${err}`);
       })
       .finally(() => {
-        renderLoading(false);
+        popupTypeEdit.renderLoading(false);
       });
   },
 });
@@ -144,7 +132,7 @@ editButton.addEventListener("click", () => {
 const popupAdd = new PopupWIthForm({
   popupSelector: ".popup_element",
   handleFormSubmit: (data) => {
-    renderLoading(true);
+    popupAdd.renderLoading(true);
     api
       .createCard(data)
       .then((data) => {
@@ -155,7 +143,7 @@ const popupAdd = new PopupWIthForm({
         console.log(`${err}`);
       })
       .finally(() => {
-        renderLoading(false);
+        popupAdd.renderLoading(false);
       });
   },
 });
@@ -169,7 +157,7 @@ addButton.addEventListener("click", () => {
 const popupTypeAvatar = new PopupWIthForm({
   popupSelector: ".popup_avatar",
   handleFormSubmit: (data) => {
-    renderLoading(true);
+    popupTypeAvatar.renderLoading(true);
     avatar.style.backgroundImage = `url(${data.link})`;
     api
       .setAvatar(data)
@@ -177,7 +165,7 @@ const popupTypeAvatar = new PopupWIthForm({
         console.log(`${err}`);
       })
       .finally(() => {
-        renderLoading(false);
+        popupTypeAvatar.renderLoading(false);
       });
     popupTypeAvatar.close();
   },
@@ -190,7 +178,7 @@ avatar.addEventListener("click", () => {
 });
 
 const api = new Api({
-  url: "https://nomoreparties.co/v1/cohort-29/ ",
+  url: "https://nomoreparties.co/v1/cohort-29/",
   headers: {
     Authorization: "0ac03c29-348f-4641-b1c9-55603c5e7c4f",
     "content-type": "application/json",
