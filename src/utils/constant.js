@@ -9,7 +9,6 @@ const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_job");
 const picturesTemplateSelector = "#element-template";
 const avatar = document.querySelector(".profile__avatar");
-const savedButtons = document.querySelectorAll(".popup__button-save");
 
 const config = {
   formSelector: ".popup__form",
@@ -31,7 +30,6 @@ export {
   nameInput,
   jobInput,
   picturesTemplateSelector,
-  savedButtons,
   avatar,
   config,
 };

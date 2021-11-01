@@ -48,7 +48,7 @@ export default class Card {
   likeCard(data) {
     this._isLiked =
       data.likes.filter((item) => {
-        return item._id == this._myId;
+        return item._id === this._myId;
       }).length > 0;
     this._element.querySelector(".element__like-counter").textContent =
       data.likes.length;
